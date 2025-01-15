@@ -1,2 +1,17 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Blog Title</title><link>https://Meekdai.github.io/Gmeek-template</link><description>Blog description</description><copyright>Blog Title</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://Meekdai.github.io/Gmeek-template</link></image><lastBuildDate>Thu, 14 Mar 2024 09:17:29 +0000</lastBuildDate><managingEditor>Blog Title</managingEditor><ttl>60</ttl><webMaster>Blog Title</webMaster><item><title>请接着之后的安装步骤执行</title><link>https://Meekdai.github.io/Gmeek-template/post/qing-jie-zhao-zhi-hou-de-an-zhuang-bu-zou-zhi-xing.html</link><description>如果你点击了`READM.md`的链接后，看到了这个页面，请继续之后的安装步骤执行。</description><guid isPermaLink="true">https://Meekdai.github.io/Gmeek-template/post/qing-jie-zhao-zhi-hou-de-an-zhuang-bu-zou-zhi-xing.html</guid><pubDate>Thu, 14 Mar 2024 09:15:10 +0000</pubDate></item><item><title>这是Gmeek模板仓库</title><link>https://Meekdai.github.io/Gmeek-template/post/zhe-shi-Gmeek-mo-ban-cang-ku.html</link><description>通过这个模板创建库，可以大大减少部署Gmeek博客的配置步骤。</description><guid isPermaLink="true">https://Meekdai.github.io/Gmeek-template/post/zhe-shi-Gmeek-mo-ban-cang-ku.html</guid><pubDate>Wed, 20 Dec 2023 07:42:24 +0000</pubDate></item></channel></rss>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Blog Title</title><link>https://liujianbo2013.github.io</link><description>Blog description</description><copyright>Blog Title</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://liujianbo2013.github.io</link></image><lastBuildDate>Wed, 15 Jan 2025 07:14:52 +0000</lastBuildDate><managingEditor>Blog Title</managingEditor><ttl>60</ttl><webMaster>Blog Title</webMaster><item><title>a</title><link>https://liujianbo2013.github.io/post/a.html</link><description>豆包：&#13;
+&#13;
+&#13;
+# 识别题目&#13;
+如图,在长方形 ABCD 中,$AB=6cm,$&#13;
+![img](https://p6-hippo-sign.byteimg.com/tos-cn-i-a9yeduch1e/571b4c5cbee14b57bdd6fb35b0d09b66~tplv-ii0cwwkcx9-resize-crop-v1:483:7:655:154:0:0.jpeg?lk3s=f89d68d8&amp;x-expires=2052284756&amp;x-signature=TOf0nHbxW%2F0o%2FlR2DaHz%2BeE37jQ%3D)&#13;
+$BC=8cm$,点 E 是 AB 上的一点,且$AE=2BE$.点 P 从点 C 出发,以 2 cm/s 的速度沿点 C—D—A—E匀速运动,最终到达点 E.设点 P 的运动时间为t s,若三角形 PCE 的面积为$18cm^{2}$,则 t 的值为 _ .&#13;
+&#13;
+***&#13;
+# 答案&#13;
+$\frac {9}{4}$或6&#13;
+&#13;
+***&#13;
+# 💡解析&#13;
+## 分析&#13;
+本题根据点 P 在不同线段上运动的情况，分别计算三角形 PCE 的面积，从而求出满足条件的 t 值。</description><guid isPermaLink="true">https://liujianbo2013.github.io/post/a.html</guid><pubDate>Wed, 15 Jan 2025 07:14:30 +0000</pubDate></item></channel></rss>
