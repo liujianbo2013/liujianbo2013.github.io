@@ -1,5 +1,6 @@
 {
     "title":"Blog Title",
+    "urlMode":"issue",
     "subTitle":"Blog description",
     "avatarUrl":"https://github.githubassets.com/favicons/favicon.svg",
     "GMEEK_VERSION":"last"
