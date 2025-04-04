@@ -1,4 +1,4 @@
-<svg width="130" height="34" xmlns="http://www.w3.org/2000/svg">
+<svg width="130" height="28" xmlns="http://www.w3.org/2000/svg">
     <rect width="128" height="32" rx="6" ry="6" x="1" y="1" fill="#1f883d" stroke="rgba(31,35,40,0.15)"/>
     <text x="64" y="18" dominant-baseline="middle" text-anchor="middle" fill="#fff" font-family="system-ui" font-weight="500" font-size="14">通过模板创建仓库</text>
 </svg>
