@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文本加密解密示例</title>
+</head>
+
+<body>
+    <textarea id="inputText" rows="5" cols="50"></textarea>
+    <button onclick="encryptText()">加密</button>
+    <button onclick="decryptText()">解密</button>
+    <div id="result">
+        <!-- 加密结果显示区域 -->
+        <div id="encryptedResult">
+            <span id="encryptedText"></span>
+            <button onclick="copyText('encryptedText')">复制加密结果</button>
+        </div>
+        <!-- 解密结果显示区域 -->
+        <div id="decryptedResult">
+            <span id="decryptedText"></span>
+            <button onclick="copyText('decryptedText')">复制解密结果</button>
+        </div>
+    </div>
+
+    <script>
+        function encryptText() {
+            var input = document.getElementById('inputText').value;
+            var encrypted = "";
+            for (var i = 0; i < input.length; i++) {
+                encrypted += String.fromCharCode(input.charCodeAt(i) + 1);
+            }
+            document.getElementById('encryptedText').textContent = "加密后的文本: " + encrypted;
+        }
+
+        function decryptText() {
+            var input = document.getElementById('inputText').value;
+            var decrypted = "";
+            for (var i = 0; i < input.length; i++) {
+                decrypted += String.fromCharCode(input.charCodeAt(i) - 1);
+            }
+            document.getElementById('decryptedText').textContent = "解密后的文本: " + decrypted;
+        }
+
+        function copyText(id) {
+            var textToCopy = document.getElementById(id).textContent;
+            var tempInput = document.createElement('input');
+            tempInput.value = textToCopy;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            alert('已复制到剪贴板！');
+        }
+    </script>
+</body>
+
+</html>
