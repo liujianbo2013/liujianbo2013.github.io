@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>全屏显示当前时间（含毫秒）</title>
+<meta name="description" content="全屏显示当前时间，包括时钟、日期和毫秒显示，支持多种显示模式切换。">
+<meta name="author" content="weihu">
+<meta name="keywords" content="时间, 时钟, 日期, 毫秒, 全屏显示">
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', 'Arial', sans-serif;
+    }
+    
+    body {
+        background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        overflow: hidden;
+        transition: background 0.5s ease;
+    }
+    
+    body.dark-mode {
+        background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    }
+    
+    .container {
+        text-align: center;
+        width: 100%;
+        max-width: 1200px;
+        padding: 20px;
+    }
+    
+    #clock {
+        font-size: 18vw;
+        font-weight: 700;
+        letter-spacing: -3px;
+        text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        margin-bottom: 20px;
+        transition: all 0.3s ease;
+    }
+    
+    .time-container {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        gap: 10px;
+    }
+    
+    .time-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .time-label {
+        font-size: 1.5vw;
+        opacity: 0.8;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-top: 5px;
+    }
+    
+    #date {
+        font-size: 4vw;
+        margin-bottom: 40px;
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+    }
+    
+    .button-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 20px;
+        max-width: 800px;
+    }
+    
+    .control-btn {
+        background: rgba(255, 255, 255, 0.15);
+        color: white;
+        border: none;
+        padding: 15px 25px;
+        font-size: 1.2rem;
+        border-radius: 50px;
+        cursor: pointer;
+        backdrop-filter: blur(10px);
+        transition: all 0.3s ease;
+        min-width: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    .control-btn:hover {
+        background: rgba(255, 255, 255, 0.25);
+        transform: translateY(-3px);
+    }
+    
+    .control-btn:active {
+        transform: translateY(1px);
+    }
+    
+    .milliseconds {
+        font-size: 7vw;
+        opacity: 0.7;
+        font-weight: 300;
+        vertical-align: super;
+    }
+    
+    .colon {
+        animation: blink 1s infinite;
+    }
+    
+    @keyframes blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.3; }
+    }
+    
+    .title {
+        font-size: 3.5rem;
+        margin-bottom: 30px;
+        text-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+    }
+    
+    .subtitle {
+        font-size: 1.5rem;
+        margin-bottom: 50px;
+        opacity: 0.9;
+        max-width: 800px;
+        line-height: 1.6;
+    }
+    
+    /* 响应式设计 */
+    @media (max-width: 768px) {
+        #clock {
+            font-size: 15vw;
+        }
+        
+        .milliseconds {
+            font-size: 5vw;
+        }
+        
+        #date {
+            font-size: 6vw;
+        }
+        
+        .title {
+            font-size: 2.5rem;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            padding: 0 20px;
+        }
+        
+        .button-container {
+            gap: 10px;
+        }
+        
+        .control-btn {
+            padding: 12px 20px;
+            font-size: 1rem;
+            min-width: 130px;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        #clock {
+            font-size: 18vw;
+        }
+        
+        .milliseconds {
+            font-size: 6vw;
+        }
+        
+        #date {
+            font-size: 7vw;
+            margin-bottom: 30px;
+        }
+        
+        .title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        
+        .subtitle {
+            font-size: 1rem;
+            margin-bottom: 30px;
+        }
+        
+        .button-container {
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .control-btn {
+            width: 90%;
+            max-width: 300px;
+        }
+    }
+    
+    /* 动画效果 */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .container > * {
+        animation: fadeIn 0.8s ease-out forwards;
+    }
+    
+    .container > *:nth-child(2) { animation-delay: 0.2s; }
+    .container > *:nth-child(3) { animation-delay: 0.4s; }
+    .container > *:nth-child(4) { animation-delay: 0.6s; }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1 class="title">全屏显示当前时间</h1>
+    <p class="subtitle">实时显示精确到毫秒的时间，支持深色模式、时间格式切换和全屏显示</p>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2651601452000060"
+     crossorigin="anonymous"></script>
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-format="autorelaxed"
+     data-ad-client="ca-pub-2651601452000060"
+     data-ad-slot="5981452354"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+    <div class="time-container">
+        <div id="clock"></div>
+    </div>
+    
+    <div id="date">
+        <div id="date-text"></div>
+        <div id="am-pm"></div>
+    </div>
+    
+    <div class="button-container">
+        <button class="control-btn" id="darkMode-btn" onclick="toggleDarkMode()">
+            <span>🌙</span> 深色模式
+        </button>
+        <button class="control-btn" id="timeFormat-btn" onclick="toggleTimeFormat()">
+            <span>⏱️</span> 12H/24H
+        </button>
+        <button class="control-btn" id="dateVisibility-btn" onclick="toggleDateVisibility()">
+            <span>📅</span> 日期显示
+        </button>
+        <button class="control-btn" id="milliseconds-btn" onclick="toggleMilliseconds()">
+            <span>⏲️</span> 毫秒显示
+        </button>
+        <button class="control-btn" id="fullscreen-btn" onclick="toggleFullScreen()">
+            <span>🔲</span> 全屏显示
+        </button>
+    </div>
+</div>
+
+<script>
+// 配置变量
+var is24HourFormat = true;
+var isDateVisible = true;
+var showMilliseconds = true;
+var colonVisible = true;
+
+// 更新时钟显示的函数
+function updateClock() {
+    var userTime = new Date();
+    
+    // 获取时间各部分
+    var hours = userTime.getHours();
+    var minutes = userTime.getMinutes();
+    var seconds = userTime.getSeconds();
+    var milliseconds = userTime.getMilliseconds();
+    
+    // 格式化时间部分
+    hours = (hours < 10 ? "0" : "") + hours;
+    minutes = (minutes < 10 ? "0" : "") + minutes;
+    seconds = (seconds < 10 ? "0" : "") + seconds;
+    milliseconds = (milliseconds < 10 ? "00" : (milliseconds < 100 ? "0" : "")) + milliseconds;
+    
+    var clockDiv = document.getElementById('clock');
+    var dateTextDiv = document.getElementById('date-text');
+    var amPmDiv = document.getElementById('am-pm');
+    
+    // 处理12小时制
+    var amPm = '';
+    if (!is24HourFormat) {
+        amPm = hours >= 12 ? '下午' : '上午';
+        hours = hours % 12 || 12;
+        hours = (hours < 10 ? "0" : "") + hours;
+    }
+    
+    // 闪烁冒号效果
+    colonVisible = !colonVisible;
+    var colon = colonVisible ? ":" : " ";
+    
+    // 构建时间字符串
+    var timeString = hours + colon + minutes + colon + seconds;
+    
+    // 添加毫秒（如果需要）
+    if (showMilliseconds) {
+        timeString += '<span class="milliseconds">.' + milliseconds + '</span>';
+    }
+    
+    clockDiv.innerHTML = timeString;
+    amPmDiv.innerText = amPm;
+    
+    // 显示日期
+    if (isDateVisible) {
+        var days = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+        var day = days[userTime.getDay()];
+        
+        var year = userTime.getFullYear();
+        var month = userTime.getMonth() + 1;
+        var date = userTime.getDate();
+        
+        var dateString = year + '年' + month + '月' + date + '日 ' + day;
+        dateTextDiv.innerText = dateString;
+    } else {
+        dateTextDiv.innerText = '';
+    }
+}
+
+// 切换深色模式
+function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+    var btn = document.getElementById('darkMode-btn');
+    btn.innerHTML = document.body.classList.contains('dark-mode') ? 
+        '<span>☀️</span> 浅色模式' : '<span>🌙</span> 深色模式';
+}
+
+// 切换时间格式
+function toggleTimeFormat() {
+    is24HourFormat = !is24HourFormat;
+    var btn = document.getElementById('timeFormat-btn');
+    btn.innerHTML = is24HourFormat ? 
+        '<span>⏱️</span> 24小时制' : '<span>⏱️</span> 12小时制';
+    updateClock();
+}
+
+// 控制日期显示
+function toggleDateVisibility() {
+    isDateVisible = !isDateVisible;
+    var btn = document.getElementById('dateVisibility-btn');
+    btn.innerHTML = isDateVisible ? 
+        '<span>📅</span> 隐藏日期' : '<span>📅</span> 显示日期';
+    updateClock();
+}
+
+// 控制毫秒显示
+function toggleMilliseconds() {
+    showMilliseconds = !showMilliseconds;
+    var btn = document.getElementById('milliseconds-btn');
+    btn.innerHTML = showMilliseconds ? 
+        '<span>⏲️</span> 隐藏毫秒' : '<span>⏲️</span> 显示毫秒';
+    updateClock();
+}
+
+// 全屏按钮功能
+function toggleFullScreen() {
+    if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => {
+            console.error(`全屏请求错误: ${err.message}`);
+        });
+    } else {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        }
+    }
+}
+
+// 添加键盘快捷键支持
+document.addEventListener('keydown', function(e) {
+    // D - 深色模式
+    if (e.key === 'd' || e.key === 'D') toggleDarkMode();
+    // T - 时间格式
+    if (e.key === 't' || e.key === 'T') toggleTimeFormat();
+    // C - 日期显示
+    if (e.key === 'c' || e.key === 'C') toggleDateVisibility();
+    // M - 毫秒显示
+    if (e.key === 'm' || e.key === 'M') toggleMilliseconds();
+    // F - 全屏
+    if (e.key === 'f' || e.key === 'F') toggleFullScreen();
+});
+
+// 初始化按钮文本
+function initButtonText() {
+    document.getElementById('darkMode-btn').innerHTML = 
+        document.body.classList.contains('dark-mode') ? 
+        '<span>☀️</span> 浅色模式' : '<span>🌙</span> 深色模式';
+    
+    document.getElementById('timeFormat-btn').innerHTML = 
+        is24HourFormat ? '<span>⏱️</span> 24小时制' : '<span>⏱️</span> 12小时制';
+    
+    document.getElementById('dateVisibility-btn').innerHTML = 
+        isDateVisible ? '<span>📅</span> 隐藏日期' : '<span>📅</span> 显示日期';
+    
+    document.getElementById('milliseconds-btn').innerHTML = 
+        showMilliseconds ? '<span>⏲️</span> 隐藏毫秒' : '<span>⏲️</span> 显示毫秒';
+}
+
+// 页面加载完成后初始化
+window.onload = function() {
+    initButtonText();
+    updateClock();
+    setInterval(updateClock, 831); // 每10毫秒更新一次，实现毫秒显示
+};
+</script>
+</body>
+</html>
