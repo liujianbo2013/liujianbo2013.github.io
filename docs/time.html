@@ -31,11 +31,44 @@
         background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
     }
     
+    /* 广告容器样式 */
+    .ad-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        padding: 10px 0;
+        background-color: rgba(0, 0, 0, 0.2);
+        margin: 10px 0;
+    }
+    
+    .ad-top {
+        margin-bottom: 20px;
+    }
+    
+    .ad-bottom {
+        margin-top: 20px;
+    }
+    
+    .ad-placeholder {
+        width: 728px;
+        height: 90px;
+        background-color: rgba(255, 255, 255, 0.1);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: rgba(255, 255, 255, 0.5);
+        border: 1px dashed rgba(255, 255, 255, 0.3);
+    }
+    
     .container {
         text-align: center;
         width: 100%;
         max-width: 1200px;
         padding: 20px;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
     
     #clock {
@@ -173,6 +206,12 @@
             font-size: 1rem;
             min-width: 130px;
         }
+        
+        /* 移动端广告样式 */
+        .ad-placeholder {
+            width: 320px;
+            height: 100px;
+        }
     }
     
     @media (max-width: 480px) {
@@ -209,6 +248,12 @@
             width: 90%;
             max-width: 300px;
         }
+        
+        /* 更小屏幕的广告样式 */
+        .ad-placeholder {
+            width: 300px;
+            height: 50px;
+        }
     }
     
     /* 动画效果 */
@@ -227,19 +272,29 @@
 </style>
 </head>
 <body>
+<!-- 顶部广告位 -->
+<div class="ad-container ad-top">
+    <div class="ad-placeholder">
+        <!-- Google AdSense 广告代码将放置在这里 -->
+        <!-- 示例代码: 
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-你的发布商ID"
+             crossorigin="anonymous"></script>
+        <ins class="adsbygoogle"
+             style="display:inline-block;width:728px;height:90px"
+             data-ad-client="ca-pub-你的发布商ID"
+             data-ad-slot="顶部广告位ID"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+        -->
+        Google AdSense 广告位
+    </div>
+</div>
+
 <div class="container">
     <h1 class="title">全屏显示当前时间</h1>
     <p class="subtitle">实时显示精确到毫秒的时间，支持深色模式、时间格式切换和全屏显示</p>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2651601452000060"
-     crossorigin="anonymous"></script>
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-format="autorelaxed"
-     data-ad-client="ca-pub-2651601452000060"
-     data-ad-slot="5981452354"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+    
     <div class="time-container">
         <div id="clock"></div>
     </div>
@@ -265,6 +320,25 @@
         <button class="control-btn" id="fullscreen-btn" onclick="toggleFullScreen()">
             <span>🔲</span> 全屏显示
         </button>
+    </div>
+</div>
+
+<!-- 底部广告位 -->
+<div class="ad-container ad-bottom">
+    <div class="ad-placeholder">
+        <!-- Google AdSense 广告代码将放置在这里 -->
+        <!-- 示例代码: 
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-你的发布商ID"
+             crossorigin="anonymous"></script>
+        <ins class="adsbygoogle"
+             style="display:inline-block;width:728px;height:90px"
+             data-ad-client="ca-pub-你的发布商ID"
+             data-ad-slot="底部广告位ID"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+        -->
+        Google AdSense 广告位
     </div>
 </div>
 
@@ -416,8 +490,27 @@ function initButtonText() {
 window.onload = function() {
     initButtonText();
     updateClock();
-    setInterval(updateClock, 831); // 每10毫秒更新一次，实现毫秒显示
+    setInterval(updateClock, 10); // 每10毫秒更新一次，实现毫秒显示
+    
+    // 广告加载后可以在这里添加相关代码
+    // 例如: loadAds();
 };
+</script>
+
+<!-- Google AdSense 初始化脚本 -->
+<!-- 请替换为您的实际发布商ID -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2651601452000060"
+     crossorigin="anonymous"></script>
+<script>
+     // 可以在这里添加广告相关的事件监听或自定义逻辑
+     function loadAds() {
+         (adsbygoogle = window.adsbygoogle || []).push({});
+     }
+     
+     // 页面加载完成后加载广告
+     window.addEventListener('load', function() {
+         setTimeout(loadAds, 1000); // 延迟1秒加载广告
+     });
 </script>
 </body>
 </html>
