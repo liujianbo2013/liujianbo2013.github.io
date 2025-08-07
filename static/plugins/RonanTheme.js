@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         html {    
-            background: url('https://blog.freeblock.cn/background.webp') no-repeat center center fixed;
+            background: url('https://picsum.photos/3840/2340') no-repeat center center fixed;
             background-size: cover;
         }
 
@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function() {
         style.innerHTML = `
 
         html {    
-            background: url('https://blog.freeblock.cn/background.webp') no-repeat center center fixed;
+            background: url('https://picsum.photos/3840/2340') no-repeat center center fixed;
             background-size: cover;
         }
 
